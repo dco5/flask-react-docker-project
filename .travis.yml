@@ -13,11 +13,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - docker-compose up -d --build
+  - docker-compose -f docker-compose-travis.yml up -d --build
 
 script:
-  - docker-compose exec users python manage.py test
-  - docker-compose exec users flake8 project
+  - docker-compose -f docker-compose-travis.yml exec users python manage.py test
+  - docker-compose -f docker-compose-travis.yml exec users flake8 project
 
 after_script:
-  - docker-compose down
+  - docker-compose -f docker-compose-travis.yml down
