@@ -22,6 +22,7 @@ services:
     build:
       context: ./services/users/project/db
       dockerfile: Dockerfile
+    privileged: true
     ports:
       - 5435:5432
     environment:
