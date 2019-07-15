@@ -2,6 +2,8 @@
   <dictionary name="jlossada">
     <words>
       <w>axios</w>
+      <w>dockerignore</w>
+      <w>htmlcov</w>
       <w>sqlalchemy</w>
       <w>tablename</w>
     </words>
