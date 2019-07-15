@@ -38,6 +38,7 @@ services:
       - 8282:80
     depends_on:
       - users
+      - client
 
   client:
     build:
