@@ -1,17 +1,8 @@
 import json
 import unittest
 
-from project import db
-from project.api.models import User
+from project.tests.utils import add_user
 from project.tests.base import BaseTestCase
-
-
-def add_user(username='jaime', email='jaime@mail.com'):
-    user = User(username=username, email=email)
-    db.session.add(user)
-    db.session.commit()
-
-    return user
 
 
 class TestUserService(BaseTestCase):
@@ -110,7 +101,7 @@ class TestUserService(BaseTestCase):
     def test_single_user(self):
         """Ensure get single user behaves correclty."""
 
-        user = add_user()
+        user = add_user('jaime','jaime@mail.com')
 
         with self.client:
             response = self.client.get(f'/users/{user.id}')
@@ -146,7 +137,7 @@ class TestUserService(BaseTestCase):
     def test_all_users(self):
         """Ensure get all users behaves correctly."""
 
-        add_user()
+        add_user('jaime','jaime@mail.com')
         add_user('carlos', 'carlos@mail.com')
 
         with self.client:
@@ -175,7 +166,7 @@ class TestUserService(BaseTestCase):
 
     def test_main_with_users(self):
         """Ensure the main route behaves correctly when users have been added to the database."""
-        add_user()
+        add_user('jaime','jaime@mail.com')
         add_user('carlos', 'carlos@mail.com')
 
         with self.client:

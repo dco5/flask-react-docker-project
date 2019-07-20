@@ -6,10 +6,12 @@ from project.tests.base import BaseTestCase
 
 from sqlalchemy.exc import IntegrityError
 
+from project.tests.utils import add_user
+
 
 class TestUserModel(BaseTestCase):
     def test_add_user(self):
-        user = User(username='justatest', email='mail@test.com')
+        user = add_user('justatest', 'mail@test.com')
         db.session.add(user)
         db.session.commit()
 
@@ -19,7 +21,7 @@ class TestUserModel(BaseTestCase):
         self.assertTrue(user.active)
 
     def test_add_user_duplicate_username(self):
-        user = User(username='justatest', email='mail@test.com')
+        user = add_user('justatest', 'mail@test.com')
         db.session.add(user)
         db.session.commit()
 
@@ -29,7 +31,7 @@ class TestUserModel(BaseTestCase):
         self.assertRaises(IntegrityError, db.session.commit)
 
     def test_add_user_duplicate_email(self):
-        user = User(username='justatest', email='mail@test.com')
+        user = add_user('justatest', 'mail@test.com')
         db.session.add(user)
         db.session.commit()
 
